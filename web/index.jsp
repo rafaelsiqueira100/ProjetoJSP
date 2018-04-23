@@ -19,7 +19,7 @@
 <%@page import="java.util.Date"%>
 
 <%
-public String verDetalhes
+
 %>
 <!DOCTYPE html>
 
@@ -31,7 +31,11 @@ public String verDetalhes
         <title>Venda de ingressos online</title>
    
 </head>
-    
+ <%
+ 	private Espetaculo espetaculos[] = null;
+ 	private int qtosEspetaculos = 0;
+
+ %>   
 <link href = "style.css" rel="stylesheet" type="text/css"/>
     
 <body>
@@ -58,13 +62,13 @@ public String verDetalhes
 
 <select name = "cb_Espetaculo">
 <%
-Connect conexao = new Connect();
+espetaculos = DAOs.getTabelaEspetaculos().getEspetaculosDisponiveis();
 
-List<Espetaculo> espetaculos = conexao.montaComboEspetaculos();
-for(int i=1; i<= espetaculos.size();i++){
-String s = espetaculos.get(i).getNome();
-String print = espetaculos.get(i).toString();
 
+
+for(int i=0; i< espetaculos.size();i++){
+String s = espetaculos[i].getNome();
+String print = espetaculos[i].toString();
 %>
 <option value = '<%=i %>'>
 <%=s %>

@@ -19,7 +19,7 @@
 <%@page import="java.util.Date"%>
 
 <%
-String nomeEspetaculo = null;
+private String nomeEspetaculo = null;
 if(request.getParameter("cb_Espetaculo")!=null)
 	nomeEspetaculo = request.getParameter("cb_Espetaculo");
 //else{}
@@ -43,19 +43,13 @@ if(request.getParameter("cb_Espetaculo")!=null)
         
 <h1>Garanta seu ingresso já!</h1>
  
-<h2>Selecione um Espetáculo:</h2>       
+<h2>Selecione uma Data para o Espetáculo:</h2>       
 <div class="form">
           
+<form action="y.jsp" method="post">
             
-
-
-<form action="escolheData.jsp" method="post">
-            
-
-<select name = "cb_Espetaculo">
+<select name = "cb_Datas">
 <%
-Connect conexao = new Connect();
-
 List<Espetaculo> espetaculos = conexao.montaComboEspetaculos();
 for(int i=1; i<= espetaculos.size();i++){
 String s = espetaculos.get(i).toString();
