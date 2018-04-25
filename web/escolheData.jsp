@@ -9,21 +9,24 @@
 
 
 
-<%@page import="Agenda.BD"%>
 
-<%@page import="Agenda.Connect"%>
-
-
-<%@page import="java.util.List"%>
+<%@page import="java.sql.Timestamp"%>
 
 <%@page import="java.util.Date"%>
 
 <%
 private String nomeEspetaculo = null;
-if(request.getParameter("cb_Espetaculo")!=null)
-	nomeEspetaculo = request.getParameter("cb_Espetaculo");
-//else{}
+private Sessao sessoes[] = null;
+private int qtasSessoes = 0;
+if(request.getParameter("cb_Espetaculo")!=null){
+	nomeEspetaculo = request.getParameter("nomeEspetaculo");
+}
 
+else{
+	
+	response.sendRedirect("index.jsp");
+}
+request.setAttribute("");
 %>
 <!DOCTYPE html>
 
@@ -39,32 +42,47 @@ if(request.getParameter("cb_Espetaculo")!=null)
 <link href = "style.css" rel="stylesheet" type="text/css"/>
     
 <body>
-
-        
-<h1>Garanta seu ingresso j·!</h1>
+<script>
+	function verDetalhes(){
+	var id = document.getElementById("cb_Datas").selectedIndex;
+	
+	document.getElementById("Detalhes").value = document.getElementById(id).value;
+	document.getElementById("codSessao").value = document.getElementById(a+id).value;
+	return 1;
+	}
+</script>
+<h1>Garanta seu ingresso j√°!</h1>
  
-<h2>Selecione uma Data para o Espet·culo:</h2>       
+<h2>Selecione uma Data para o Espet√°culo:</h2>       
 <div class="form">
           
-<form action="y.jsp" method="post">
+<form action="escolheSetor.jsp" method="post">
             
-<select name = "cb_Datas">
+<select name = "cb_Datas" onChange = "verDetalhes();">
 <%
-List<Espetaculo> espetaculos = conexao.montaComboEspetaculos();
-for(int i=1; i<= espetaculos.size();i++){
-String s = espetaculos.get(i).toString();
-
-
+	int codEspetaculo = DAOS.getTabelaEspetaculos().getEspetaculo(nomeEspetaculo).getCodEspetaculo());
+   	sessoes = DAOs.getTabelaSessoes().getSessoesDisponiveis(
+   	codEspetaculo);
+   	session.setAttribute("codEspetaculo", codEspetaculo.toString());
+	for(int i=0; i<sessoes.size();i++){
+	String data = sessoes[i].getDataHorario().toString();
+	String print = sessoes[i].ToString();
+	String codSessao = sessoes[i].getCodSessao().toString();
 %>
-<option value = '<%=i %>'>
-<%=s%>
+<option value = '<%=data.toString()%>'>
+
+    
+<input type="hidden" id = '<%=i %>' value ='<%=print %>'>
+<input type ="hidden" id='a<%=i %>>' value ='<%=codSessao %>' >
 </option>
 <%
 }
 %>
 </select>
 
-<input type = "submit" value = "Selecionar">
+<input id="Detalhes">
+<input type="hidden " id= "codSessao">
+<input type = "submit" value = "Confirmar">
 
 
 </form>

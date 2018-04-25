@@ -74,16 +74,28 @@ public class Espetaculos extends Dao{
         
         	return Espetaculos;
  	   }
-	public Espetaculo getEspetaculo(String nome) throws SQLException{
+	public Espetaculo getEspetaculo(String nome) throws Exception{
 		String query = "SELECT * FROM Espetaculo e WHERE e.nome = ?";
 		this.getBd().prepareStatement(query) ;
 		this.getBd().setString(1, nome);
 		MeuResultSet rsEspetaculo = (MeuResultSet) this.getBd().executeQuery();
 		Espetaculo retorno = null;
 		if(rsEspetaculo.next())
-			retorno = new Espetaculo(rsEspetaculo.get);
+			retorno =  new Espetaculo (Espetaculo.getInt("codEspetaculo"), Espetaculo.getInt("codPedido"), Espetaculo.getBigDecimal("razaoPrecoFinal"), Espetaculo.getDate("dataPagamento"), Espetaculo.getDate("dataFoiEntregue"));
 		else
-
+            throw new Exception("Espetaculos : Não existe espetáculo com esse nome:" + nome);
+	
+	}
+    public Espetaculo getEspetaculo(int codEspetaculo) throws Exception{
+		String query = "SELECT * FROM Espetaculo e WHERE e.codEspetaculo = ?";
+		this.getBd().prepareStatement(query) ;
+		this.getBd().setSetInt(1, codEspetaculo);
+		MeuResultSet rsEspetaculo = (MeuResultSet) this.getBd().executeQuery();
+		Espetaculo retorno = null;
+		if(rsEspetaculo.next())
+			retorno =  new Espetaculo (Espetaculo.getInt("codEspetaculo"), Espetaculo.getInt("codPedido"), Espetaculo.getBigDecimal("razaoPrecoFinal"), Espetaculo.getDate("dataPagamento"), Espetaculo.getDate("dataFoiEntregue"));
+		else
+            throw new Exception("Espetaculos : Não existe espetáculo com esse código:" + codEspetaculo.toString());
 	
 	}
 }

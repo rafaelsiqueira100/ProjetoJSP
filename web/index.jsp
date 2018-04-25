@@ -8,19 +8,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 
-
-<%@page import="Agenda.BD"%>
-
-<%@page import="Agenda.Connect"%>
-
-
-<%@page import="java.util.List"%>
-
-<%@page import="java.util.Date"%>
-
-<%
-
-%>
+</%@page>
 <!DOCTYPE html>
 
 <html>
@@ -60,7 +48,7 @@
 <form action="escolheData.jsp" method="post">
             
 
-<select name = "cb_Espetaculo">
+<select name = "cb_Espetaculo" onChange = "verDetalhes();">
 <%
 espetaculos = DAOs.getTabelaEspetaculos().getEspetaculosDisponiveis();
 
@@ -70,15 +58,13 @@ for(int i=0; i< espetaculos.size();i++){
 String s = espetaculos[i].getNome();
 String print = espetaculos[i].toString();
 %>
-<option value = '<%=i %>'>
-<%=s %>
-<input type="hidden" id = '<%=i %>'value ='<%=print %>'>
+<option value = '<%=s %>'>
+<input type="hidden" id = '<%=i %>' value ='<%=print %>'>
 </option>
 <%
 }
 %>
 </select>
-<input type = "button" value = "Ver Detalhes" onclick="verDetalhes();">
 <input id="Detalhes">
 <input type = "submit" value = "Confirmar">
 </form>

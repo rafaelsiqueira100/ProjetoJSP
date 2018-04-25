@@ -1,10 +1,10 @@
-import java.sql.TimeSpan;
+import java.sql.Timestamp;
 public class Sessao(){
 	private int codSessao;
 	private int codEspetaculo;
 	private int codTeatro;
-	private TimeSpan dataHorario;
-	public Sessao(int codS, int codE, int codT, Timespan dataH){
+	private Timestamp dataHorario;
+	public Sessao(int codS, int codE, int codT, Timestamp dataH){
 		this.codSessao = codS;
 		this.codEspetaculo = codE;
 		this.codTeatro = codTeatro;
@@ -24,7 +24,7 @@ public class Sessao(){
         return codTeatro;
     }
 
-    public TimeSpan getDataHorario() {
+    public Timestamp getDataHorario() {
         return dataHorario;
     }
 
@@ -40,7 +40,7 @@ public class Sessao(){
         this.codTeatro = codTeatro;
     }
 
-    public void setDataHorario(TimeSpan dataHorario) {
+    public void setDataHorario(Timestamp dataHorario) {
         this.dataHorario = dataHorario;
     }
 
@@ -77,10 +77,27 @@ public class Sessao(){
         }
         return Objects.equals(this.dataHorario, other.dataHorario);
     }
-
+/*
+private int codSessao;
+	private int codEspetaculo;
+	private int codTeatro;
+	private Timestamp dataHorario;
+*/
     @Override
     public String toString() {
-        return "Sessao{" + "codSessao=" + codSessao + ", codEspetaculo=" + codEspetaculo + ", codTeatro=" + codTeatro + ", dataHorario=" + dataHorario.toString() + '}';
+        Espetaculo espetaculoRelacionado = DAOs.getTabelaEspetaculos().getEspetaculo(this.getCodEspetaculo());
+        Teatro teatroRelacionado = DAOs.getTabelaTeatros().getTeatro(this.getCodTeatro());
+        String resultado = ""+this.espetaculoRelacionado.ToString() + '\r'+'\n'
+		
+        /*+"Gênero:"+DAOs.getTabelaGeneros().selecionaGenero(this.codGenero).getNomeGenero()+'\r'+'\n'
+		+"Duração: " + this.duracao + " minutos"+'\r'+'\n'
+		+"Sinopse: " + this.sinopse + '\r'+'\n'
+		+"Direção: " + this.direcao + '\r'+'\n'
+		+"Idioma: " + this.idioma + '\r'+ '\n';*/
+        + 
+        this.teatroRelacionado.toString();+'\r'+'\n'
+        +"Data e Horário:" + this.getDataHorario().toString()+'\r'+'\n';
+		return resultado;		
     }
 
 }

@@ -1,3 +1,4 @@
+import DAOs.DAOs;
 public class Espetaculo{
 
 	private int codEspetaculo;
@@ -21,9 +22,9 @@ public class Espetaculo{
 		this.idioma  = idi;
 	}
 	public String toString(){
-		Connect conexao = new Connect();
-		String resultado = this.codEspetaculo.ToString() + " - "+ this.nome + '\r'+'\n'
-		+"Gênero:"+conexao.selecionaGenero(this.codGenero)+'\r'+'\n'
+		
+		String resultado = "Espetáculo:"+this.codEspetaculo.ToString() + " - "+ this.nome + '\r'+'\n'
+		+"Gênero:"+DAOs.getTabelaGeneros().selecionaGenero(this.codGenero).getNomeGenero()+'\r'+'\n'
 		+"Duração: " + this.duracao + " minutos"+'\r'+'\n'
 		+"Sinopse: " + this.sinopse + '\r'+'\n'
 		+"Direção: " + this.direcao + '\r'+'\n'
