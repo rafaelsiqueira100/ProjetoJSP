@@ -1,4 +1,7 @@
+package DBOs;
+
 import DAOs.DAOs;
+import java.util.Objects;
 public class Espetaculo{
 
 	private int codEspetaculo;
@@ -17,23 +20,20 @@ public class Espetaculo{
 		this.codGenero = codGen;
 		this.duracao = dur;
 		this.sinopse = sin;
-		this.censura = new Integer(cens);
+		this.censura = cens;
 		this.direcao = dir;
-		this.idioma  = idi;
+		this.idioma  = idiom;
 	}
+        @Override
 	public String toString(){
 		
-		String resultado = "Espetáculo:"+this.codEspetaculo.ToString() + " - "+ this.nome + '\r'+'\n'
-		+"Gênero:"+DAOs.getTabelaGeneros().selecionaGenero(this.codGenero).getNomeGenero()+'\r'+'\n'
-		+"Duração: " + this.duracao + " minutos"+'\r'+'\n'
-		+"Sinopse: " + this.sinopse + '\r'+'\n'
-		+"Direção: " + this.direcao + '\r'+'\n'
-		+"Idioma: " + this.idioma + '\r'+ '\n';
-		if(this.cens == null)
-			resultado += "Classificação: Livre para todos os públicos.";
-		else	
-			resultado += "Classificação: Não recomendado para menores de "+ this.cens.toString()+" anos.";
-		return resultado;		
+		//String resultado = Integer.toString(this.codEspetaculo) + " - "+ this.nome + '\r'+'\n'+"Gï¿½nero:"+DAOs.getTabelaGenerosEspetaculos().selecionaGenero(this.codGenero).getNomeGenero()+'\r'+'\n'+"Duraï¿½ï¿½o: " + Integer.toString(this.duracao) + " minutos"+'\r'+'\n'+"Sinopse: " + this.sinopse + '\r'+'\n'+"Direï¿½ï¿½o: " + this.direcao + '\r'+'\n'+"Idioma: " + this.idioma + '\r'+ '\n';
+		//if(this.censura == null)
+		//	resultado += "Classificaï¿½ï¿½o: Livre para todos os pï¿½blicos.";
+		//else	
+		//	resultado += "Classificaï¿½ï¿½o: Nï¿½o recomendado para menores de "+ this.censura.toString()+" anos.";
+		//return resultado;
+                return null;
 	}
 	 public int getCodEspetaculo() {
         	return codEspetaculo;

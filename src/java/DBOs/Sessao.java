@@ -1,9 +1,17 @@
+package DBOs;
+
 import java.sql.Timestamp;
-public class Sessao(){
+import java.util.Objects;
+import DAOs.DAOs;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+public class Sessao{
 	private int codSessao;
 	private int codEspetaculo;
 	private int codTeatro;
 	private Timestamp dataHorario;
+
 	public Sessao(int codS, int codE, int codT, Timestamp dataH){
 		this.codSessao = codS;
 		this.codEspetaculo = codE;
@@ -85,19 +93,19 @@ private int codSessao;
 */
     @Override
     public String toString() {
-        Espetaculo espetaculoRelacionado = DAOs.getTabelaEspetaculos().getEspetaculo(this.getCodEspetaculo());
-        Teatro teatroRelacionado = DAOs.getTabelaTeatros().getTeatro(this.getCodTeatro());
-        String resultado = ""+this.espetaculoRelacionado.ToString() + '\r'+'\n'
-		
-        /*+"Gênero:"+DAOs.getTabelaGeneros().selecionaGenero(this.codGenero).getNomeGenero()+'\r'+'\n'
-		+"Duração: " + this.duracao + " minutos"+'\r'+'\n'
-		+"Sinopse: " + this.sinopse + '\r'+'\n'
-		+"Direção: " + this.direcao + '\r'+'\n'
-		+"Idioma: " + this.idioma + '\r'+ '\n';*/
-        + 
-        this.teatroRelacionado.toString();+'\r'+'\n'
-        +"Data e Horário:" + this.getDataHorario().toString()+'\r'+'\n';
-		return resultado;		
+            try {
+                Espetaculo espetaculoRelacionado = DAOs.getTabelaEspetaculos().getEspetaculo(this.getCodEspetaculo());
+            } catch (Exception ex) {
+                Logger.getLogger(Sessao.class.getName()).log(Level.SEVERE, null, ex);
+            }
+       // String resultado = Integer.toString(codEspetaculo)+ " - "+ nomeEspetaculo + '\r'+'\n'+"Gênero:"+DAOs.getTabelaGeneros().selecionaGenero(this.codGenero).getNomeGenero()+'\r'+'\n'+"Duração: " + this.duracao + " minutos"+'\r'+'\n'+"Sinopse: " + this.sinopse + '\r'+'\n'+"Direção: " + this.direcao + '\r'+'\n'+"Idioma: " + this.idioma + '\r'+ '\n';
+        
+		//if(this.cens == null)
+//			resultado += "Classificação: Livre para todos os públicos.";
+//		else	
+	//		resultado += "Classificação: Não recomendado para menores de "+ this.cens.toString()+" anos.";
+	//return resultado;	
+         return "erro";		
     }
 
 }

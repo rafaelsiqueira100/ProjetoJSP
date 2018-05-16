@@ -9,17 +9,15 @@
 
 
 
-<%@page import="Agenda.BD"%>
 
-<%@page import="Agenda.Connect"%>
-
-
-<%@page import="java.util.List"%>
+<%@page import="java.sql.TimeSpan"%>
 
 <%@page import="java.util.Date"%>
 
 <%
 private String nomeEspetaculo = null;
+private Sessao sessoes[] = null;
+private int qtasSessoes = 0;
 if(request.getParameter("cb_Espetaculo")!=null)
 	nomeEspetaculo = request.getParameter("cb_Espetaculo");
 //else{}redirect para index.jsp
@@ -50,14 +48,18 @@ if(request.getParameter("cb_Espetaculo")!=null)
             
 <select name = "cb_Datas">
 <%
-List<Espetaculo> espetaculos = conexao.montaComboEspetaculos();
-for(int i=1; i<= espetaculos.size();i++){
-String s = espetaculos.get(i).toString();
+   sessoes = DAOs.getTabelaSessoes().getSessoesDisponiveis(
+   DAOS.getTabelaEspetaculos().getEspetaculo(nomeEspetaculo).getCodEspetaculo());
 
+for(int i=0; i<sessoes.size();i++){
+String data = sessoes[i].getDataHorario().toString();
+String print = sessoes[i].ToString();
 
 %>
 <option value = '<%=i %>'>
-<%=s%>
+<%=data%>
+    
+<input type="hidden" id = '<%=i %>'value ='<%=print %>'>
 </option>
 <%
 }

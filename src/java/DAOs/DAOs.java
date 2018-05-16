@@ -1,8 +1,4 @@
-﻿
-
 package DAOs;
-
-import core.*;
 
 /**
  * Classe cujos atributos correspondem aos objetos de acesso ao BD
@@ -44,21 +40,21 @@ public class DAOs {
      * Pega o dao de Espetaculos
      * @return o dao que dá acesso a tabela de Espetaculo
      */
-    public static Usuarios getTabelaEspetaculos() {
+    public static Espetaculos getTabelaEspetaculos() {
         return tabelaEspetaculos;
     }
     /**
      * Pega o dao de Generos de Espetaculos
      * @return o dao que dá acesso a tabela de Genero de Espetaculo
      */
-    public static Fornecedores getTabelaGenerosEspetaculos() {
+    public static GenerosEspetaculos getTabelaGenerosEspetaculos() {
         return tabelaGenerosEspetaculos;
     }
     /**
      * Pega o dao de Perfis de Clientes
      * @return o dao que dá acesso a tabela de Perfil de Cliente
      */
-    public static Lotes getTabelaPerfisClientes() {
+    public static PerfisClientes getTabelaPerfisClientes() {
         return tabelaPerfisClientes;
     }
     /**

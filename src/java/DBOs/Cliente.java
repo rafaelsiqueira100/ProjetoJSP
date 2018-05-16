@@ -1,5 +1,6 @@
-
+package DBOs;
 import java.util.Date;
+import java.util.Objects;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -14,7 +15,8 @@ import java.util.Date;
 public class Cliente {
     private String usuario;
     private String senha;            
-    private int codPerfil;
+    private int codPerfil;   
+    private String celular;
     private String cpf;
     private String rg;
     private String nome;
@@ -44,7 +46,7 @@ public class Cliente {
     }
 
     public int getCodPerfil() {
-        return this.getCodPerfil();
+        return this.codPerfil;
     }
 
     public void setCodPerfil(int codPerfil) {
@@ -114,24 +116,19 @@ public class Cliente {
             throw new IllegalArgumentException();
         this.celular = celular;
     }
-    private String celular;
-    public Cliente(String usuario, String senha, 
-            int codPerfil, String cpf, String rg, 
-            String nome, Date dataNasc, String email, 
-            String celular)throws IllegalArgumentException{
-        this.setUsuario(usuario);
-        this.setCelular(celular);
-        this.setSenha(senha);
-        
-        this.setCpf(cpf);
-        
-        this.setRg(rg);
-        this.setNome(nome);
-        this.setEmail(email);
-        this.setDataNasc(dataNasc);
-        this.setCodPerfil(codPerfil);
+    public Cliente(String usuario, String senha, int codPerfil, String cpf, String rg, String nome, Date dataNasc, String email, String celular)throws IllegalArgumentException{
+        this.usuario = usuario;
+        this.celular = celular;
+        this.senha = senha;
+        this.cpf = cpf;
+        this.rg = rg;
+        this.nome = nome;
+        this.email = email;
+        this.dataNasc = dataNasc;
+        this.codPerfil = codPerfil;
     }
- public boolean equals(Object obj) {
+    
+    public boolean equals(Object obj) {
         if (this == obj) {
             return true;
         }
@@ -157,7 +154,7 @@ public class Cliente {
         if (!Objects.equals(this.nome, other.nome)) {
             return false;
         }
-        if (!Objects.equals(this.dataNascimento, other.dataNascimento)) {
+        if (!Objects.equals(this.dataNasc, other.dataNasc)) {
             return false;
         }
         if (!Objects.equals(this.email, other.email)) {
@@ -174,14 +171,15 @@ public class Cliente {
         hash = 83 * hash + Objects.hashCode(this.cpf);
         hash = 83 * hash + Objects.hashCode(this.rg);
         hash = 83 * hash + Objects.hashCode(this.nome);
-        hash = 83 * hash + Objects.hashCode(this.dataNascimento);
+        hash = 83 * hash + Objects.hashCode(this.dataNasc);
         hash = 83 * hash + Objects.hashCode(this.email);
         hash = 83 * hash + Objects.hashCode(this.celular);
         return hash;
     }
     
+    @Override
     public String toString() {
-        return "Cliente{" + "usuario=" + usuario + ", senha=" + senha + ", cpf=" + cpf + ", rg=" + rg + ", nome=" + nome + ", dataNascimento=" + dataNascimento + ", email=" + email + ", celular=" + celular + '}';
+        return "Cliente{" + "usuario=" + usuario + ", senha=" + senha + ", cpf=" + cpf + ", rg=" + rg + ", nome=" + nome + ", dataNascimento=" + dataNasc + ", email=" + email + ", celular=" + celular + '}';
     }
 
 }

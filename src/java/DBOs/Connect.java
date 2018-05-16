@@ -1,4 +1,5 @@
-﻿/*
+package DBOs;
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -34,14 +35,7 @@ public class Connect
 
     public void finalize () throws Exception
     {
-        try
-        {
-           bd.fecharConexao();
-        }
-        catch (SQLException e)
-        {
-            throw new Exception ("desconexao do SGBD");
-        }
+        bd.fecharConexao();
     }
     
     /*public boolean ValidaLoginSenha (String login, String pass) throws Exception
@@ -125,20 +119,19 @@ public class Connect
 	   throw new Exception ("Erro na montaComboCompromisso()");
        }
     }*/
-    public List<Espetaculo> montaComboEspetaculos()throws SQLException{
+    public ArrayList<Espetaculo> montaComboEspetaculos()throws SQLException, Exception{
 	try{
 		String sql = "SELECT * FROM Espetaculo";
-		ResultSet rs = bd.execConsulta(sql);
-		List lista = new List<Espetaculo>();   
-          	while (rs.next()) 
-          	{   
-             		Espetaculo atual = new Espetaculo(rs.getInt("codEspetaculo"), 
-rs.getString("nome"), rs.getInt("codGenero"), rs.getString("duracao"), rs.getString("sinopse"), rs.getInteger("censura"), 
-rs.getString("direcao"), rs.getString("idioma"));
-             		//dados[0] =(rs.getString("data"));
-             		lista.add(dados);
-          	}   
-          	rs.close();
+                ArrayList lista;
+            try (ResultSet rs = bd.execConsulta(sql)) {
+                lista = new ArrayList<Espetaculo>();
+                while (rs.next())
+                {
+                    Espetaculo atual = new Espetaculo(rs.getInt("codEspetaculo"), rs.getString("nome"), rs.getInt("codGenero"), rs.getInt("duracao"), rs.getString("sinopse"), rs.getInt("censura"), rs.getString("direcao"), rs.getString("idioma"));
+                    //dados[0] =(rs.getString("data"));
+                    lista.add(atual);
+                }
+            }
           	return lista;
 	}
 	catch(SQLException ex){
@@ -147,12 +140,8 @@ rs.getString("direcao"), rs.getString("idioma"));
 
     }
 	public List<Date> montaComboDatas(String nome)throws SQLException{
-		try{
-			String sql = "SELECT * FROM "
-		}
-		catch(SQLException ex){
-			throw new Exception("Erro de conexão: Connect.montaComboDatas()");
-		}
+            String sql = "SELECT * FROM ";
+            return null;
 	}
 	public String selecionaGenero(int cod)throws SQLException, Exception{
 		try{

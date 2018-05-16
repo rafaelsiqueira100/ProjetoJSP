@@ -1,3 +1,7 @@
+package DBOs;
+
+import java.util.Objects;
+
 public class Genero{
 	private int codGenero;
 	private String nome;
@@ -12,7 +16,7 @@ public class Genero{
     }
 
     public String getNomeGenero() {
-        return nomeGenero;
+        return nome;
     }
 
     public void setCodGenero(int codGenero) {
@@ -20,14 +24,14 @@ public class Genero{
     }
 
     public void setNomeGenero(String nomeGenero) {
-        this.nomeGenero = nomeGenero;
+        this.nome = nomeGenero;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
         hash = 53 * hash + this.codGenero;
-        hash = 53 * hash + Objects.hashCode(this.nomeGenero);
+        hash = 53 * hash + Objects.hashCode(this.nome);
         return hash;
     }
 
@@ -42,15 +46,16 @@ public class Genero{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final GeneroEspetaculo other = (GeneroEspetaculo) obj;
+        final Genero other = (Genero) obj;
         if (this.codGenero != other.codGenero) {
             return false;
-        }
-        return Objects.equals(this.nomeGenero, other.nomeGenero);
+        } 
+        return true;
+        //return Objects.equals(this.nome, other.nomeGenero);
     }
 
     @Override
     public String toString() {
-        return "GeneroEspetaculo{" + "codGenero=" + codGenero + ", nomeGenero=" + nomeGenero + '}';
+        return "GeneroEspetaculo{" + "codGenero=" + codGenero + ", nomeGenero=" + nome + '}';
     }
 }
