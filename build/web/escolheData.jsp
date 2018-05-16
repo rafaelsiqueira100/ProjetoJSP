@@ -7,10 +7,10 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+<%@page import="DBOs.Sessao"%>
 
 
-
-<%@page import="java.sql.TimeSpan"%>
+<%@page import="java.util.TimeSpan"%>
 
 <%@page import="java.util.Date"%>
 
@@ -48,7 +48,7 @@ if(request.getParameter("cb_Espetaculo")!=null)
             
 <select name = "cb_Datas">
 <%
-   sessoes = DAOs.getTabelaSessoes().getSessoesDisponiveis(
+    sessoes = DAOs.getTabelaSessoes().getSessoesDisponiveis(
    DAOS.getTabelaEspetaculos().getEspetaculo(nomeEspetaculo).getCodEspetaculo());
 
 for(int i=0; i<sessoes.size();i++){
