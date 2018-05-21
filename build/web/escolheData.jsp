@@ -44,11 +44,11 @@ if(request.getParameter("cb_Espetaculo")!=null)
 <h2>Selecione uma Data para o Espetáculo:</h2>       
 <div class="form">
           
-<form action="y.jsp" method="post">
+<form action="escolheSetor.jsp" method="post">
             
 <select name = "cb_Datas">
 <%
-    sessoes = DAOs.getTabelaSessoes().getSessoesDisponiveis(
+   sessoes = DAOs.getTabelaSessoes().getSessoesDisponiveis(
    DAOS.getTabelaEspetaculos().getEspetaculo(nomeEspetaculo).getCodEspetaculo()).clone();
 
 for(int i=0; i<sessoes.size();i++){

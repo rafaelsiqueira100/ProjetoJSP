@@ -9,7 +9,6 @@
 
 
 
-<%@page import="com.sun.corba.se.spi.presentation.rmi.StubAdapter.request(Object, String, boolean)"%>
 
 <%@page import="java.sql.Timestamp"%>
 
@@ -22,10 +21,15 @@ private Setor setores[] = null;
 private int qtosSetores = 0;
 private String codEspetaculo = "";
 private String codSessao = "";
-if(request.getParameter("cb_Datas")!=null)
+private String data = "";
+if(request.getParameter("cb_Datas")!=null){
 	codSessao = request.getParameter("codSessao");
 	request.setAttribute("codSessao", codSessao);
 	codEspetaculo = request.getAttribute("codEspetaculo");
+        
+        data = request.getParameter("cb_Datas");
+        request.setAttribute("data", data);
+}
 else{
 	response.sendRedirect("index.jsp");
 }
@@ -50,6 +54,9 @@ else{
 	var valor = document.getElementById("cb_Setores").selectedValue;
 	
 	document.getElementById("Detalhes").value = valor;
+        var id = document.getElementById("cb_Setores").selectedIndex;
+	
+        document.getElementById("codSetor").value = document.getElementById("a"+id).value;
 	return 1;
 	}
 </script>
@@ -58,7 +65,7 @@ else{
 <h2>Selecione o Setor do Teatro:</h2>       
 <div class="form">
           
-<form action="y.jsp" method="post">
+<form action="escolheIngresso.jsp" method="post">
             
 <select name = "cb_Setores" onChange = "verDetalhes();">
 <%
@@ -69,7 +76,6 @@ else{
 	String nome = setores[i].getNome();
 	String print = setores[i].toString();
 	int codSetor = setores[i].getCodSetor();
-
 %>
 <option value = '<%=i.toString() + " - "+ data.toString()%>'>
 
@@ -80,7 +86,7 @@ else{
 }
 %>
 </select>
-
+<input type = "button" value = "Ver Detalhes" onclick="verDetalhes();">
 <input id="Detalhes">
 <input type="hidden" id = 'codSetor'>
 <input type = "submit" value = "Confirmar">

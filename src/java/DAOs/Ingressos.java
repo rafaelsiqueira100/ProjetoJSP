@@ -9,6 +9,8 @@ package DAOs;
  *
  * @author u16191
  */
-public class Ingressos {
-    
+public class Ingressos extends Dao {
+    public Ingressos() throws Exception{
+        super();
+    }
 }

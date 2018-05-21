@@ -19,6 +19,11 @@ public class Ingresso {
     private boolean inteira;
 
     @Override
+    public String toString() {
+        return "Ingresso{" + "codIngresso=" + codIngresso + ", codAssento=" + codAssento + ", usuario=" + usuario + ", preco=" + preco + ", inteira=" + inteira + '}';
+    }
+
+    @Override
     public int hashCode() {
         int hash = 7;
         hash = 89 * hash + this.codIngresso;
