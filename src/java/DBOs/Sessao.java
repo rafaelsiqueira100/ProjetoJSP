@@ -5,7 +5,7 @@ import java.util.Objects;
 import DAOs.DAOs;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import DBOs.Espetaculo;
 public class Sessao{
 	private int codSessao;
 	private int codEspetaculo;
@@ -93,19 +93,20 @@ private int codSessao;
 */
     @Override
     public String toString() {
+                Espetaculo espetaculoRelacionado = null;
             try {
-                Espetaculo espetaculoRelacionado = DAOs.getTabelaEspetaculos().getEspetaculo(this.getCodEspetaculo());
+                espetaculoRelacionado = DAOs.getTabelaEspetaculos().getEspetaculo(this.getCodEspetaculo());
             } catch (Exception ex) {
                 Logger.getLogger(Sessao.class.getName()).log(Level.SEVERE, null, ex);
             }
-       // String resultado = Integer.toString(codEspetaculo)+ " - "+ nomeEspetaculo + '\r'+'\n'+"Gênero:"+DAOs.getTabelaGeneros().selecionaGenero(this.codGenero).getNomeGenero()+'\r'+'\n'+"Duração: " + this.duracao + " minutos"+'\r'+'\n'+"Sinopse: " + this.sinopse + '\r'+'\n'+"Direção: " + this.direcao + '\r'+'\n'+"Idioma: " + this.idioma + '\r'+ '\n';
+        String resultado = Integer.toString(codEspetaculo)+ " - "+ espetaculoRelacionado.getNome() + '\r'+'\n'+"Gênero:"+DAOs.getTabelaGenerosEspetaculos().selecionaGenero(espetaculoRelacionado.getCodGenero()).getNomeGenero()+'\r'+'\n'+"Duração: " + espetaculoRelacionado.getDuracao() + " minutos"+'\r'+'\n'+"Sinopse: " + espetaculoRelacionado.getSinopse() + '\r'+'\n'+"Direção: " + espetaculoRelacionado.getDirecao() + '\r'+'\n'+"Idioma: " + espetaculoRelacionado.getIdioma() + '\r'+ '\n';
         
-		//if(this.cens == null)
-//			resultado += "Classificação: Livre para todos os públicos.";
-//		else	
-	//		resultado += "Classificação: Não recomendado para menores de "+ this.cens.toString()+" anos.";
-	//return resultado;	
-         return "erro";		
+		if(espetaculoRelacionado.cens == null)
+			resultado += "Classificação: Livre para todos os públicos.";
+		else	
+			resultado += "Classificação: Não recomendado para menores de "+ this.cens.toString()+" anos.";
+	return resultado;	
+         	
     }
 
 }

@@ -49,7 +49,7 @@ if(request.getParameter("cb_Espetaculo")!=null)
 <select name = "cb_Datas">
 <%
     sessoes = DAOs.getTabelaSessoes().getSessoesDisponiveis(
-   DAOS.getTabelaEspetaculos().getEspetaculo(nomeEspetaculo).getCodEspetaculo());
+   DAOS.getTabelaEspetaculos().getEspetaculo(nomeEspetaculo).getCodEspetaculo()).clone();
 
 for(int i=0; i<sessoes.size();i++){
 String data = sessoes[i].getDataHorario().toString();

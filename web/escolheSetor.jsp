@@ -9,12 +9,13 @@
 
 
 
+<%@page import="com.sun.corba.se.spi.presentation.rmi.StubAdapter.request(Object, String, boolean)"%>
 
 <%@page import="java.sql.Timestamp"%>
 
 <%@page import="java.util.Date"%>
 <%@page import="DBOs.Setor"%>
-
+<%@page import="DAOs.DAOs"%>
 <%
 
 private Setor setores[] = null;
@@ -61,13 +62,12 @@ else{
             
 <select name = "cb_Setores" onChange = "verDetalhes();">
 <%
-	int codTeatro = DAOs.getTabelaSessoes.getSessao(Integer.parseInt(codSessao)).getCodTeatro();
-   	setores = DAOs.getTabelaSetores().getSetoresDisponiveis(
-   	codTeatro);
+	int codTeatro = DAOs.getTabelaSessoes().getSessao(Integer.parseInt(codSessao)).getCodTeatro();
+   	setores = DAOs.getTabelaSetores().getSetoresDisponiveis(codTeatro);
 
 	for(int i=0; i<setores.size();i++){
 	String nome = setores[i].getNome();
-	String print = setores[i].ToString();
+	String print = setores[i].toString();
 	int codSetor = setores[i].getCodSetor();
 
 %>

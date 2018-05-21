@@ -26,15 +26,18 @@ public class Espetaculo{
 	}
         @Override
 	public String toString(){
-		
-		//String resultado = Integer.toString(this.codEspetaculo) + " - "+ this.nome + '\r'+'\n'+"G�nero:"+DAOs.getTabelaGenerosEspetaculos().selecionaGenero(this.codGenero).getNomeGenero()+'\r'+'\n'+"Dura��o: " + Integer.toString(this.duracao) + " minutos"+'\r'+'\n'+"Sinopse: " + this.sinopse + '\r'+'\n'+"Dire��o: " + this.direcao + '\r'+'\n'+"Idioma: " + this.idioma + '\r'+ '\n';
-		//if(this.censura == null)
-		//	resultado += "Classifica��o: Livre para todos os p�blicos.";
-		//else	
-		//	resultado += "Classifica��o: N�o recomendado para menores de "+ this.censura.toString()+" anos.";
-		//return resultado;
-                return null;
-	}
+		try{
+		String resultado = Integer.toString(this.codEspetaculo) + " - "+ this.nome + '\r'+'\n'+"G�nero:"+DAOs.getTabelaGenerosEspetaculos().selecionaGenero(this.codGenero).getNomeGenero()+'\r'+'\n'+"Dura��o: " + Integer.toString(this.duracao) + " minutos"+'\r'+'\n'+"Sinopse: " + this.sinopse + '\r'+'\n'+"Dire��o: " + this.direcao + '\r'+'\n'+"Idioma: " + this.idioma + '\r'+ '\n';
+		if(this.censura == null)
+			resultado += "Classificação: Livre para todos os públicos.";
+		else	
+			resultado += "Classificação: Não recomendado para menores de "+ this.censura.toString()+" anos.";
+		return resultado;
+                }
+                catch(Exception e){
+                    return null;
+                }
+        }
 	 public int getCodEspetaculo() {
         	return codEspetaculo;
     	}
