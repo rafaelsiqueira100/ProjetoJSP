@@ -17,15 +17,15 @@
 <%@page import="DAOs.DAOs"%>
 <%
 
-private Setor setores[] = null;
-private int qtosSetores = 0;
-private String codEspetaculo = "";
-private String codSessao = "";
-private String data = "";
+Setor setores[] = null;
+int qtosSetores = 0;
+String codEspetaculo = "";
+String codSessao = "";
+String data = "";
 if(request.getParameter("cb_Datas")!=null){
 	codSessao = request.getParameter("codSessao");
 	request.setAttribute("codSessao", codSessao);
-	codEspetaculo = request.getAttribute("codEspetaculo");
+	codEspetaculo = request.getAttribute("codEspetaculo").toString();
         
         data = request.getParameter("cb_Datas");
         request.setAttribute("data", data);
@@ -50,14 +50,14 @@ else{
     
 <body>
 <script>
-	function verDetalhes(){
-	var valor = document.getElementById("cb_Setores").selectedValue;
-	
-	document.getElementById("Detalhes").value = valor;
+	function verDetalhes(){	
         var id = document.getElementById("cb_Setores").selectedIndex;
 	
         document.getElementById("codSetor").value = document.getElementById("a"+id).value;
-	return 1;
+	
+	
+        document.getElementById("detalhes").value = document.getElementById(id).value;
+	document.getElementById("Detalhes").style.display = 'block';
 	}
 </script>
 <h1>Garanta seu ingresso já!</h1>
@@ -67,7 +67,7 @@ else{
           
 <form action="escolheIngresso.jsp" method="post">
             
-<select name = "cb_Setores" onChange = "verDetalhes();">
+<select name = "cb_Setores" >
 <%
 	int codTeatro = DAOs.getTabelaSessoes().getSessao(Integer.parseInt(codSessao)).getCodTeatro();
    	setores = DAOs.getTabelaSetores().getSetoresDisponiveis(codTeatro);
@@ -87,11 +87,12 @@ else{
 %>
 </select>
 <input type = "button" value = "Ver Detalhes" onclick="verDetalhes();">
-<input id="Detalhes">
+<div id="Detalhes" style="display: none;">
+<input id="detalhes">
 <input type="hidden" id = 'codSetor'>
 <input type = "submit" value = "Confirmar">
 
-
+</div>
 </form>
         
 </div>

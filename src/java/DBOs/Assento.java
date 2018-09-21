@@ -12,6 +12,10 @@ package DBOs;
 public class Assento {
     private int codAssento;
     private int codSetor;
+    public Assento(int codA, int codS){
+        this.codAssento = codA;
+        this.codSetor = codS;
+    }
     
      public int getCodAssento() {
         return codAssento;

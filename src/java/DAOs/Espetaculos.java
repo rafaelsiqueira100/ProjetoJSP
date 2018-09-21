@@ -22,8 +22,9 @@ public class Espetaculos extends Dao{
 	public int qtosEspetaculosDisponiveis() throws SQLException {
         	int qtosEspetaculos  = 0;
         
-        	String query = "SELECT COUNT(e.codEspetaculo) AS qtosEspetaculos FROM Espetaculos e inner join Sessao s on s.codEspetaculo = e.codEspetaculo inner join Teatro t on t.codTeatro = s.codTeatro inner join Setor set on set.codTeatro = t.codTeatro inner join Assento a on a.codSetor = set.codSetor inner join Ingresso i on i.codAssento where (SELECT COUNT(codAssento) FROM Assento) > (SELECT COUNT(codIngresso) FROM Ingresso)";
-        
+        	String query = "SELECT COUNT(e.codEspetaculo) AS qtosEspetaculos FROM Espetaculo E"
+                //+ " inner join Sessao s on s.codEspetaculo = e.codEspetaculo inner join Teatro t on t.codTeatro = s.codTeatro inner join Setor se on se.codTeatro = t.codTeatro inner join Assento a on a.codSetor = se.codSetor inner join Ingresso i on i.codAssento = a.codAssento where (SELECT COUNT(codAssento) FROM Assento) > (SELECT COUNT(codIngresso) FROM Ingresso)"     
+                +"";
         	this.getBd().prepareStatement(query);
         
         	MeuResultSet rsEspetaculo = (MeuResultSet) this.getBd().executeQuery();
@@ -36,7 +37,9 @@ public class Espetaculos extends Dao{
     	}
         
 	public Espetaculo[] getEspetaculosDisponiveis() throws SQLException {
-        	String query = "SELECT * FROM Espetaculo e inner join Sessao s on s.codEspetaculo = e.codEspetaculo inner join Teatro t on t.codTeatro = s.codTeatro inner join Setor set on set.codTeatro = t.codTeatro inner join Assento a on a.codSetor = set.codSetor inner join Ingresso i on i.codAssento where (SELECT COUNT(codAssento) FROM Assento) > (SELECT COUNT(codIngresso) FROM Ingresso)";
+        	String query = "SELECT * FROM Espetaculo e "
+                        //+ "inner join Sessao s on s.codEspetaculo = e.codEspetaculo inner join Teatro t on t.codTeatro = s.codTeatro inner join Setor se on se.codTeatro = t.codTeatro inner join Assento a on a.codSetor = se.codSetor inner join Ingresso i on i.codAssento = a.codAssento where (SELECT COUNT(codAssento) FROM Assento) > (SELECT COUNT(codIngresso) FROM Ingresso)"
+                        + "";
        
        		Espetaculo[] Espetaculos = new Espetaculo[this.qtosEspetaculosDisponiveis()];
                
@@ -52,7 +55,10 @@ public class Espetaculos extends Dao{
                 		Espetaculo aIncluir = new Espetaculo (Espetaculo.getInt("codEspetaculo"), Espetaculo.getString("nome"), Espetaculo.getInt("codGenero"), Espetaculo.getInt("duracao"), Espetaculo.getString("sinopse"), Espetaculo.getInt("censura"), Espetaculo.getString("direcao"), Espetaculo.getString("idioma"));
                 
                 		Espetaculos[indiceEspetaculos] = aIncluir;
-	            	} catch (Exception e) {}            
+	            	} catch (Exception e) {
+                            
+                        e.printStackTrace();
+                        }            
         	}
         
         	return Espetaculos;

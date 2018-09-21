@@ -11,20 +11,23 @@
 <%@page import="DBOs.Ingresso"%>
 <%@page import="DAOs.DAOs"%>
 <%
-    private String codEspetaculo = "";
-    private String codSessao = "";
-    private String data = "";
-    private String codSetor = "";
-    private int[] qtdIngresso = new int[2];
+    String codEspetaculo = "";
+    String codSessao = "";
+    String data = "";
+    String codSetor = "";
+    int[] qtdIngresso = new int[2];
 if(request.getAttribute("codSetor")!= null){
-    codSessao = request.getAttribute("codSessao");
+    codSessao = request.getAttribute("codSessao").toString();
     request.setAttribute("codSessao", codSessao);
-    codEspetaculo = request.getAttribute("codEspetaculo");
+
+    codEspetaculo = request.getAttribute("codEspetaculo").toString();
 
     request.setAttribute("codEspetaculo", codEspetaculo);
-    data = request.getAttribute("data");
+
+    data = request.getAttribute("data").toString();
     
     request.setAttribute("data", data);
+
     codSetor = request.getParameter("codSetor");
     request.setAttribute("codSetor", codSetor);
 
@@ -59,8 +62,8 @@ response.sendRedirect("index.jsp");
         <h2>Escolha a quantidade de cada ingresso:</h2>
         <div class = "form">
         <form action = "fazerCadastro.jsp">
-        Quantidade de Meias:<input type="number" id = "meia" step="1" min="0">
-        Quantidade de Inteiras:<input type="number" id = "inteira" step="1" min="0">
+        Quantidade de Meias:<input type="number" id = "meia" step="1" min="0" required>
+        Quantidade de Inteiras:<input type="number" id = "inteira" step="1" min="0" required>
         <input type = "button" value = "Ver Detalhes" onclick="verDetalhes();">
         <input id="Detalhes">
         <input type="submit" value="Confirmar">

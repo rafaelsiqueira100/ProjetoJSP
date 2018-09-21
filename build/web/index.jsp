@@ -7,9 +7,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-
-</%@page>
-
+<%@page import="DBOs.Espetaculo"%>
+<%@page import="DAOs.*"%>
 
 
 <%
@@ -26,55 +25,64 @@
    
 </head>
  <%
- 	private Espetaculo espetaculos[] = null;
- 	private int qtosEspetaculos = 0;
+ 	 Espetaculo espetaculos[] = null;
+ 	 int qtosEspetaculos = 0;
 
  %>   
 <link href = "style.css" rel="stylesheet" type="text/css"/>
     
-<body>
+<body class="corpo">
 
 <script>
 	function verDetalhes(){
-	var id = document.getElementById("cb_Espetaculo").selectedIndex;
+	var combobox = document.getElementById("cb_Espetaculo");
 	
-	document.getElementById("Detalhes").value = document.getElementById(id).value;
-	return 1;
+	document.getElementById("detalhes").value = combobox.options[combobox.selectedIndex].name;
+        document.getElementById("Detalhes").style.display= 'block';
+        
 	}
 </script>
         
-<h1>Garanta seu ingresso j·!</h1>
- 
-<h2>Selecione um Espet·culo:</h2>       
-<div class="form">
+<h1 id="grandeIngresso" id="grandeIngresso">Garanta seu ingresso!</h1>
+
+<h2 id="medioIngresso">Selecione um Espet√°culo:</h2>       
+<div id="formularioDiv" class="form">
           
             
 
 
 <form action="escolheData.jsp" method="post">
             
-
-<select name = "cb_Espetaculo">
 <%
-espetaculos = DAOs.getTabelaEspetaculos().getEspetaculosDisponiveis();
+    espetaculos = DAOs.getTabelaEspetaculos().getEspetaculosDisponiveis();
+    qtosEspetaculos = espetaculos.length;
 
 
-
-for(int i=0; i< espetaculos.size();i++){
+%>
+    <select  id = "cb_Espetaculo" size="<%=qtosEspetaculos%>" required>
+<%
+for(int i=0; i< qtosEspetaculos;i++){
 String s = espetaculos[i].getNome();
 String print = espetaculos[i].toString();
 %>
-<option value = '<%=i %>'>
-<%=s %>
-<input type="hidden" id = '<%=i %>'value ='<%=print %>'>
+<option name='<%=print%>'>
+<%= (s)%>
 </option>
+
 <%
 }
 %>
 </select>
-<input type = "button" value = "Ver Detalhes" onclick="verDetalhes();">
-<input id="Detalhes">
-<input type = "submit" value = "Confirmar">
+<p>
+<input id="botao" type = "button" value = "Ver Detalhes" onclick="verDetalhes();">
+<p>
+    <div id="Detalhes" style='display:none;'>
+        <!-- -->
+        <textarea rows="30" cols="50" readonly id="detalhes" >
+</textarea> 
+<p>
+<input id="botao" type = "submit" value = "Confirmar" >
+</div>
 </form>
         
 </div>

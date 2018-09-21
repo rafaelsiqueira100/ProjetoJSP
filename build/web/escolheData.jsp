@@ -5,22 +5,26 @@
 --%>
 
 
+<%@page import="DAOs.DAOs"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@page import="DBOs.Sessao"%>
 
 
-<%@page import="java.util.TimeSpan"%>
+<%@page import="java.sql.Timestamp"%>
 
 <%@page import="java.util.Date"%>
 
 <%
-private String nomeEspetaculo = null;
-private Sessao sessoes[] = null;
-private int qtasSessoes = 0;
-if(request.getParameter("cb_Espetaculo")!=null)
-	nomeEspetaculo = request.getParameter("cb_Espetaculo");
-//else{}redirect para index.jsp
+ String nomeEspetaculo = null; 
+ Sessao[] sessoes = new Sessao[DAOs.getTabelaSessoes().qtosSessoesDisponiveis(DAOs.getTabelaEspetaculos().getEspetaculo(request.getParameter("cb_espetaculo")).getCodEspetaculo())];
+ int qtasSessoes = 0;
+if(request.getParameter("cb_Espetaculo")!=null){
+     nomeEspetaculo = request.getParameter("cb_Espetaculo");
+}
+else{
+    response.sendRedirect("index.jsp");
+}
 
 %>
 <!DOCTYPE html>
@@ -37,7 +41,15 @@ if(request.getParameter("cb_Espetaculo")!=null)
 <link href = "style.css" rel="stylesheet" type="text/css"/>
     
 <body>
-
+    <script>
+    function verDetalhes(){
+        var combobox = document.getElementById(cb_Datas);
+        document.getElementById("detalhes").value = 
+                combobox.options[combobox.selectedIndex])
+        document.getElementById("Detalhes").style.display = 'block';
+    }
+    
+    </script>
         
 <h1>Garanta seu ingresso já!</h1>
  
@@ -49,24 +61,29 @@ if(request.getParameter("cb_Espetaculo")!=null)
 <select name = "cb_Datas">
 <%
    sessoes = DAOs.getTabelaSessoes().getSessoesDisponiveis(
-   DAOS.getTabelaEspetaculos().getEspetaculo(nomeEspetaculo).getCodEspetaculo()).clone();
+   DAOs.getTabelaEspetaculos().getEspetaculo(nomeEspetaculo).getCodEspetaculo()).clone();
 
-for(int i=0; i<sessoes.size();i++){
+for(int i=0; i < sessoes.length ;i++){
 String data = sessoes[i].getDataHorario().toString();
-String print = sessoes[i].ToString();
+String print = sessoes[i].toString();
 
 %>
-<option value = '<%=i %>'>
-<%=data%>
+<option value = '<%=data %>' name='<%=print %>'>
     
-<input type="hidden" id = '<%=i %>'value ='<%=print %>'>
 </option>
 <%
 }
 %>
 </select>
-
-<input type = "submit" value = "Selecionar">
+<input id="botao" type = "button" value = "Ver Detalhes" onclick="verDetalhes();">
+<p>
+    <div id="Detalhes" style='display:none;'>
+        <!-- -->
+        <textarea rows="30" cols="50" readonly id="detalhes" >
+</textarea> 
+<p>
+<input id="botao" type = "submit" value = "Confirmar" >
+</div>
 
 
 </form>

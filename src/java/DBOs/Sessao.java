@@ -93,7 +93,7 @@ private int codSessao;
 */
     @Override
     public String toString() {
-                Espetaculo espetaculoRelacionado = null;
+        /*        Espetaculo espetaculoRelacionado = null;
             try {
                 espetaculoRelacionado = DAOs.getTabelaEspetaculos().getEspetaculo(this.getCodEspetaculo());
             } catch (Exception ex) {
@@ -104,9 +104,10 @@ private int codSessao;
 		if(espetaculoRelacionado.cens == null)
 			resultado += "Classificação: Livre para todos os públicos.";
 		else	
-			resultado += "Classificação: Não recomendado para menores de "+ this.cens.toString()+" anos.";
+			resultado += "Classificação: Não recomendado para menores de "+ espetaculoRelacionado..toString()+" anos.";
 	return resultado;	
-         	
+         	*/
+               return "a";
     }
 
 }

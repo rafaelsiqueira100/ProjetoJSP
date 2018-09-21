@@ -1,24 +1,25 @@
-package DAOs;
+package DBOs;
 
 /**
  *
  * @author u15185
  */
 public class Poltrona {
-    private int idPoltrona;
+    private int codPoltrona;
     private int fileira;
     private char letra;
     private boolean situacao;
-
-    public Poltrona(int idPoltrona, int fileira, char letra, boolean situacao) {
-        this.idPoltrona = idPoltrona;
+    private int codSetor;
+    public Poltrona(int codPoltrona, int fileira, char letra, boolean situacao, int codSetor) {
+        this.codPoltrona = codPoltrona;
         this.fileira = fileira;
         this.letra = letra;
         this.situacao = situacao;
+        this.codSetor = codSetor;
     }
 
-    public int getIdPoltrona() {
-        return idPoltrona;
+    public int getCodPoltrona() {
+        return codPoltrona;
     }
 
     public int getFileira() {
@@ -34,7 +35,7 @@ public class Poltrona {
     }
 
     public void setIdPoltrona(int idPoltrona) {
-        this.idPoltrona = idPoltrona;
+        this.codPoltrona = idPoltrona;
     }
 
     public void setFileira(int fileira) {
@@ -48,11 +49,17 @@ public class Poltrona {
     public void setSituacao(boolean situacao) {
         this.situacao = situacao;
     }
+    public int getCodSetor(){
+        return this.codSetor;
+    }
+    public void setCodSetor(int codS){
+        this.codSetor = codS;
+    }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 79 * hash + this.idPoltrona;
+        hash = 79 * hash + this.codPoltrona;
         hash = 79 * hash + this.fileira;
         hash = 79 * hash + this.letra;
         hash = 79 * hash + (this.situacao ? 1 : 0);
@@ -71,7 +78,7 @@ public class Poltrona {
             return false;
         }
         final Poltrona other = (Poltrona) obj;
-        if (this.idPoltrona != other.idPoltrona) {
+        if (this.codPoltrona != other.codPoltrona) {
             return false;
         }
         if (this.fileira != other.fileira) {
@@ -85,6 +92,6 @@ public class Poltrona {
 
     @Override
     public String toString() {
-        return "Poltrona{" + "idPoltrona=" + idPoltrona + ", fileira=" + fileira + ", letra=" + letra + ", situacao=" + situacao + '}';
+        return "Poltrona{" + "idPoltrona=" + codPoltrona + ", fileira=" + fileira + ", letra=" + letra + ", situacao=" + situacao + '}';
     }    
 }

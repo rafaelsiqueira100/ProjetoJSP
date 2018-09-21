@@ -18,6 +18,12 @@ public class Ingresso {
     private double preco;
     private boolean inteira;
 
+    public Ingresso(int codA, String u, double p, boolean i){
+        this.codAssento = codA;
+        this.usuario = u;
+        this.preco = p;
+        this.inteira = i;
+    }
     @Override
     public String toString() {
         return "Ingresso{" + "codIngresso=" + codIngresso + ", codAssento=" + codAssento + ", usuario=" + usuario + ", preco=" + preco + ", inteira=" + inteira + '}';

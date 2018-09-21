@@ -20,7 +20,7 @@ public class Cliente {
     private String cpf;
     private String rg;
     private String nome;
-    private Date dataNasc;
+    private String dataNasc;
     private String email;
 
 
@@ -85,14 +85,12 @@ public class Cliente {
         this.nome = nome;
     }
 
-    public Date getDataNasc() {
+    public String getDataNasc() {
         return dataNasc;
     }
 
-    public void setDataNasc(Date dataNasc) {
-        Date hoje = new Date((System.currentTimeMillis()));
-        Date dataNova = (Date)dataNasc.clone();
-        if(dataNasc==null || dataNova.compareTo(hoje)>=0)
+    public void setDataNasc(String dataNova) {
+        if(dataNova==null || dataNova.equals(""))
             throw new IllegalArgumentException();
         this.dataNasc= dataNova;
     }
@@ -116,7 +114,7 @@ public class Cliente {
             throw new IllegalArgumentException();
         this.celular = celular;
     }
-    public Cliente(String usuario, String senha, int codPerfil, String cpf, String rg, String nome, Date dataNasc, String email, String celular)throws IllegalArgumentException{
+    public Cliente(String usuario, String senha, int codPerfil, String cpf, String rg, String nome, String dataNasc, String email, String celular)throws IllegalArgumentException{
         this.usuario = usuario;
         this.celular = celular;
         this.senha = senha;

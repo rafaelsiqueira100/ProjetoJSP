@@ -6,6 +6,7 @@ package DAOs;
  * @since 2016
  */
 public class DAOs {
+    private static Assentos             tabelaAssentos;
     private static Clientes     	tabelaClientes;
     private static Espetaculos  	tabelaEspetaculos;
     private static GenerosEspetaculos 	tabelaGenerosEspetaculos ;
@@ -13,12 +14,14 @@ public class DAOs {
     private static Poltronas     	tabelaPoltronas;
     private static Sessoes		tabelaSessoes;
     private static Teatros        	tabelaTeatros;
+    private static Ingressos            tabelaIngressos;
     
     /**
      * Visto que todos os atributos são estáticos, são todos inicializados no construtor estático.
      */
     static {
         try {
+            tabelaAssentos              = new Assentos();
             tabelaClientes      	= new Clientes();
             tabelaEspetaculos		= new Espetaculos();
             tabelaGenerosEspetaculos 	= new GenerosEspetaculos();
@@ -26,8 +29,16 @@ public class DAOs {
             tabelaPoltronas		= new Poltronas();
             tabelaSessoes		= new Sessoes();
             tabelaTeatros		= new Teatros();
+            tabelaIngressos             = new Ingressos();
             
         } catch (Exception e) {}        
+    }
+    /**
+     * Pega o dao de assentos
+     * @return o dao que dá acesso a tabela de assento
+     */
+    public static Assentos getTabelaAssentos () {
+        return tabelaAssentos ;
     }
     /**
      * Pega o dao de clientes
@@ -78,6 +89,12 @@ public class DAOs {
     public static Teatros getTabelaTeatros() {
         return tabelaTeatros;
     }
-    
+    /**
+        * Pega o dao de Ingressos
+     * @return o dao que dá acesso a tabela de Ingresso
+     */
+    public static Ingressos getTabelaIngressos() {
+        return tabelaIngressos;
+    }
    
 }
